@@ -6,14 +6,22 @@ import fetch from 'node-fetch';
 async function download(params) {
   const command = ffmpeg(params.url);
 
-  await command
+  await new Promise((resolve, reject) => {
+    command
     .on('start', () => { console.log('Processing started !'); })
     .on('progress', (progress) => { console.log('Processing: ' + Math.floor(progress.percent) + '% done'); })
-    .on('end', () => {})
-    .on('error', (err) => { console.log('An error occurred: ' + err.message); })
+    .on('end', () => {
+      resolve();
+    })
+    .on('error', (err) => { 
+      console.log('An error occurred: ' + err.message); 
+      reject();
+    })
     .audioCodec('libmp3lame')
     .audioBitrate('320')
     .mergeToFile(`./dist/audio/${params.name}.mp3`, './temp_dist');  
+  });
+
 }
 
 async function getLastOriUri() {
@@ -40,13 +48,9 @@ async function getLastOriUri() {
 }
 
 async function main () {
-  try {
-    const pObj = await getLastOriUri();
-    await download(pObj);
-    console.log('finish');
-  } catch (e) {
-    console.log('download audio error', e);
-  }
+  const pObj = await getLastOriUri();
+  await download(pObj);
+  console.log('finish');
 }
 
 export default main;

@@ -46,8 +46,9 @@ async function request(obj) {
 
 async function main() {
   await initDir();
+
   Object.keys(urlMap).forEach(async (item) => {
-    request({
+    await request({
       key: item,
       url: urlMap[item]
     })
