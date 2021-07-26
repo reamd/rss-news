@@ -19,7 +19,7 @@ async function download(params) {
     })
     .audioCodec('libmp3lame')
     .audioBitrate('320')
-    .mergeToFile(`./dist/audio/${params.name}.mp3`, './temp_dist');  
+    .mergeToFile(`./dist/audio/latest.mp3`, './temp_dist');  
   });
 
 }
