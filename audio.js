@@ -3,17 +3,17 @@ import ffmpeg from 'fluent-ffmpeg';
 import cheerio from 'cheerio';
 import fetch from 'node-fetch';
 
-function download(params) {
+async function download(params) {
   const command = ffmpeg(params.url);
 
-  command
+  await command
     .on('start', () => { console.log('Processing started !'); })
     .on('progress', (progress) => { console.log('Processing: ' + Math.floor(progress.percent) + '% done'); })
     .on('end', () => {})
     .on('error', (err) => { console.log('An error occurred: ' + err.message); })
     .audioCodec('libmp3lame')
     .audioBitrate('320')
-    .mergeToFile(`./dist/audio/${params.name}.mp3`, './temp_dist');
+    .mergeToFile(`./dist/audio/${params.name}.mp3`, './temp_dist');  
 }
 
 async function getLastOriUri() {
@@ -42,7 +42,8 @@ async function getLastOriUri() {
 async function main () {
   try {
     const pObj = await getLastOriUri();
-    download(pObj);
+    await download(pObj);
+    console.log('finish');
   } catch (e) {
     console.log('download audio error', e);
   }
