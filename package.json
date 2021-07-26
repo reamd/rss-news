@@ -1,0 +1,26 @@
+{
+  "name": "rss-news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reamd/rss-news.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reamd/rss-news/issues"
+  },
+  "homepage": "https://github.com/reamd/rss-news#readme",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "cheerio": "^1.0.0-rc.10",
+    "fluent-ffmpeg": "^2.1.2",
+    "node-fetch": "^3.0.0-beta.10"
+  }
+}
